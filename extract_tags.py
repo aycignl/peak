@@ -28,7 +28,6 @@ MODEL_ID = "you should type your MODEL_ID"
 # Change this to whatever image URL you want to process
 # IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg'
 IMAGE_FILE_LOCATION = '/Users/brain/Downloads/metro-north.jpeg'
-# IMAGE_FILE_LOCATION = '/Users/brain/Desktop/research_utrecht/explanation/ImFiles_untagged'
 # This is optional. You can specify a model version or the empty string for the default
 MODEL_VERSION_ID = ''
 
