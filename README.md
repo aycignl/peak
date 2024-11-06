@@ -14,7 +14,7 @@ PEAK is a privacy assistant that explains privacy labels by generating human-und
 
 ## Citations
 
-You can read/cite our [Paper](https://arxiv.org/abs/2301.02079).
+You can read&cite our papers: [Can We Explain Privacy?](https://ieeexplore.ieee.org/document/10184288) and [PEAK](https://arxiv.org/abs/2301.02079).
 
 ## Contact
 
