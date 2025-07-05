@@ -1,0 +1,100 @@
+# PEAK Development Configuration
+# This file contains configuration settings for development environment
+
+# Application Settings
+app:
+  name: "PEAK"
+  version: "1.0.0"
+  environment: "development"
+  debug: true
+  log_level: "DEBUG"
+
+# Data Configuration
+data:
+  base_path: "data/"
+  train_file: "df_train.csv"
+  test_file: "df_test.csv"
+  train_shapley_file: "train_df_shapley.csv"
+  test_shapley_file: "test_df_shapley.csv"
+  cache_enabled: true
+  cache_dir: "cache/"
+
+# Model Configuration
+models:
+  base_path: "models/"
+  
+  # Topic Extraction Settings
+  topic_extraction:
+    n_topics: 5
+    max_features: 1000
+    min_df: 2
+    max_df: 0.95
+    random_state: 42
+    
+  # Classification Settings
+  classification:
+    algorithm: "RandomForest"
+    n_estimators: 100
+    max_depth: null
+    min_samples_split: 2
+    min_samples_leaf: 1
+    random_state: 42
+    
+  # Text Processing
+  text_processing:
+    remove_stopwords: true
+    lowercase: true
+    remove_punctuation: true
+    min_word_length: 3
+    max_word_length: 15
+
+# Pipeline Configuration
+pipeline:
+  training:
+    test_split: 0.2
+    validation_split: 0.1
+    cross_validation: true
+    cv_folds: 5
+    save_checkpoints: true
+    checkpoint_interval: 100
+    
+  inference:
+    batch_size: 32
+    enable_caching: true
+    generate_explanations: true
+
+# API Configuration
+api:
+  clarifai:
+    enabled: false  # Set to true and add API key to use Clarifai
+    api_key: "${CLARIFAI_API_KEY}"
+    model_id: "general-image-recognition"
+    timeout: 30
+
+# Logging Configuration
+logging:
+  level: "DEBUG"
+  format: "json"
+  file_enabled: true
+  file_path: "logs/peak_dev.log"
+  console_enabled: true
+  max_file_size: "10MB"
+  backup_count: 5
+
+# Database Configuration (if needed for future features)
+database:
+  enabled: false
+  type: "sqlite"
+  path: "data/peak_dev.db"
+
+# Performance Settings
+performance:
+  n_jobs: -1  # Use all available CPU cores
+  memory_limit: "2GB"
+  enable_profiling: true
+
+# Security Settings
+security:
+  secret_key: "${SECRET_KEY}"
+  allowed_hosts: ["localhost", "127.0.0.1"]
+  cors_enabled: true

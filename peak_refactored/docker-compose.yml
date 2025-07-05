@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  peak-app:
+    build: .
+    container_name: peak-system
+    environment:
+      - PEAK_ENV=development
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./cache:/app/cache
+    ports:
+      - "8000:8000"
+    networks:
+      - peak-network
+    restart: unless-stopped
+    
+  # Optional: PostgreSQL database for future features
+  peak-db:
+    image: postgres:13
+    container_name: peak-database
+    environment:
+      - POSTGRES_DB=peak_db
+      - POSTGRES_USER=peak_user
+      - POSTGRES_PASSWORD=peak_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - peak-network
+    restart: unless-stopped
+    profiles:
+      - database  # Only start with --profile database
+    
+  # Optional: Redis for caching
+  peak-redis:
+    image: redis:6-alpine
+    container_name: peak-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - peak-network
+    restart: unless-stopped
+    profiles:
+      - cache  # Only start with --profile cache
+
+volumes:
+  postgres_data:
+
+networks:
+  peak-network:
+    driver: bridge

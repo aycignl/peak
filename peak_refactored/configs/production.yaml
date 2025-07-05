@@ -1,0 +1,112 @@
+# PEAK Production Configuration
+# This file contains configuration settings for production environment
+
+# Application Settings
+app:
+  name: "PEAK"
+  version: "1.0.0"
+  environment: "production"
+  debug: false
+  log_level: "INFO"
+
+# Data Configuration
+data:
+  base_path: "/app/data/"
+  train_file: "df_train.csv"
+  test_file: "df_test.csv"
+  train_shapley_file: "train_df_shapley.csv"
+  test_shapley_file: "test_df_shapley.csv"
+  cache_enabled: true
+  cache_dir: "/app/cache/"
+
+# Model Configuration
+models:
+  base_path: "/app/models/"
+  
+  # Topic Extraction Settings
+  topic_extraction:
+    n_topics: 10
+    max_features: 5000
+    min_df: 5
+    max_df: 0.9
+    random_state: 42
+    
+  # Classification Settings
+  classification:
+    algorithm: "RandomForest"
+    n_estimators: 200
+    max_depth: 20
+    min_samples_split: 5
+    min_samples_leaf: 2
+    random_state: 42
+    
+  # Text Processing
+  text_processing:
+    remove_stopwords: true
+    lowercase: true
+    remove_punctuation: true
+    min_word_length: 3
+    max_word_length: 15
+
+# Pipeline Configuration
+pipeline:
+  training:
+    test_split: 0.2
+    validation_split: 0.1
+    cross_validation: true
+    cv_folds: 10
+    save_checkpoints: true
+    checkpoint_interval: 1000
+    
+  inference:
+    batch_size: 64
+    enable_caching: true
+    generate_explanations: true
+
+# API Configuration
+api:
+  clarifai:
+    enabled: true
+    api_key: "${CLARIFAI_API_KEY}"
+    model_id: "general-image-recognition"
+    timeout: 30
+    retry_attempts: 3
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "json"
+  file_enabled: true
+  file_path: "/var/log/peak/peak.log"
+  console_enabled: false
+  max_file_size: "100MB"
+  backup_count: 10
+
+# Database Configuration
+database:
+  enabled: false
+  type: "postgresql"
+  host: "${DB_HOST}"
+  port: 5432
+  name: "${DB_NAME}"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+
+# Performance Settings
+performance:
+  n_jobs: -1
+  memory_limit: "8GB"
+  enable_profiling: false
+
+# Security Settings
+security:
+  secret_key: "${SECRET_KEY}"
+  allowed_hosts: ["${ALLOWED_HOSTS}"]
+  cors_enabled: false
+  ssl_required: true
+
+# Monitoring Settings
+monitoring:
+  enabled: true
+  metrics_endpoint: "/metrics"
+  health_endpoint: "/health"
